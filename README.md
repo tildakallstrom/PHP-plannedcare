@@ -8,7 +8,7 @@ IVplaneradvardland.json, using PHP and put in a database.
 
 ### Config.php
 The config file is ignored when pushing. To get the code working add the following in a config.php file:
-`
+```
 spl_autoload_register(function ($class_name) {
     include 'classes/' . $class_name . '.class.php';
 });
@@ -20,5 +20,4 @@ define("DBDATABASE", "");
 
 error_reporting(-1);
 ini_set("display_errors", 1);
-`
-IVplaneradvardland.json, and put in a database using PHP.
+```
