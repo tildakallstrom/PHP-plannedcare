@@ -4,7 +4,7 @@ statistics for "Number of people who have received planned care abroad".
 
 ## PHP
 The info is fetched from an API: https://www.forsakringskassan.se/fk_apps/MEKAREST/public/v1/iv-planerad/
-IVplaneradvardland.json, and put in a database.
+IVplaneradvardland.json, using PHP and put in a database.
 
 ### Config.php
 The config file is ignored when pushing. To get the code working add the following in a config.php file:
@@ -21,3 +21,4 @@ define("DBDATABASE", "");
 error_reporting(-1);
 ini_set("display_errors", 1);
 `
+IVplaneradvardland.json, and put in a database using PHP.
