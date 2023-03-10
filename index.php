@@ -1,6 +1,6 @@
 <?php
 require_once('config.php');
-
+include('includes/header.php');
 // Create an instance of the Care class
 $care = new Care();
 
@@ -33,3 +33,6 @@ $listings = $care->getListings();
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php
+include('includes/footer.php');
+?>
