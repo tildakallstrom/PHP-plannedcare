@@ -1,0 +1,49 @@
+body {
+  max-width: 900px;
+  margin: auto;
+}
+table.diagram {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+table.diagram th,
+table.diagram td {
+  padding: 5px;
+  text-align: center;
+}
+table.diagram td.bar {
+  position: relative;
+  height: 20px;
+  background-color: #ddd;
+  border: 1px solid #999;
+  overflow: hidden;
+}
+table.diagram td.bar .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #555;
+}
+table.diagram td.bar .label {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 10px;
+  color: #888;
+  white-space: nowrap;
+}
+table.diagram td.bar .label.bottom {
+  top: auto;
+  bottom: -15px;
+  font-size: 12px;
+  color: #333;
+  white-space: nowrap;
+  transform: rotate(-45deg) translateX(50%);
+  transform-origin: bottom left;
+}
