@@ -32,8 +32,6 @@ foreach ($listings as $listing) {
 }
 $current_year = null;
 ?>
-
-<ul class="data-list">
 <?php foreach ($grouped_listings as $year => $year_listings) : ?>
   <?php
   $year_total = 0;
@@ -49,19 +47,17 @@ $current_year = null;
     }
   }
   ?>
-  
-  <h2>Totalt antal personer som fått vård utomlands <?= $year ?>: <?= $year_total ?>st, varav antal kvinnor: <?= $year_women ?>st, och antal män: <?= $year_men ?>st.</h2>
-  
+    <h2>Totalt antal personer som fått vård utomlands <?= $year ?>: <?= $year_total ?>st, varav antal kvinnor: <?= $year_women ?>st, och antal män: <?= $year_men ?>st.</h2>
   <!-- Add the percent scale -->
   <span class="percent">%</span>
- <div class="bar-container">
+ <div class="bar-container1">
 <div class="percent-scale">
   <?php for ($i = 0; $i <= 10; $i++) : ?>
     <span class=""><?= $i * 10 ?></span>
   <?php endfor; ?>
 </div>
 </div>
-
+<div class="data-list">
   <ul class="data-list stripes">
       <?php  //loop through listings grouped by year
       foreach ($year_listings as $listing) : ?>
@@ -81,5 +77,8 @@ $current_year = null;
 <?php endforeach; ?>
   </ul>
 <?php endforeach; ?>
-</ul>
+</div>
+</div>
+</div>
+</div>
 

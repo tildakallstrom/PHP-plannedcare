@@ -15,7 +15,7 @@
 <body>
     <header>
         <div class="grid">
-            <img src="https://tildakallstrom.se/WebOne/includes/logo.png" class="logo"/>
+            <img src="https://tildakallstrom.se/WebOne/includes/logo.png" class="logo" alt="Logotyp"/>
         </div>
         </header>
         <div class="main">
