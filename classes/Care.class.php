@@ -4,20 +4,18 @@ require_once('./config.php');
 class Care
 {
     private $conn;
-
+    //constructor
     public function __construct() {
         $this->conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBDATABASE);
         if (!$this->conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
     }
-
     public function __destruct() {
         mysqli_close($this->conn);
     }
 
-
-
+//get all the listings from db
 public function getListings() {
         $sql = "SELECT * FROM care";
         $result = mysqli_query($this->conn, $sql);
@@ -27,7 +25,7 @@ public function getListings() {
         }
         return $listings;
     }
-
+// get listings with countrycode ALL
 public function getAllListings() {
     $sql = "SELECT * FROM care WHERE countrycode='ALL'";
     $result = mysqli_query($this->conn, $sql);
@@ -37,16 +35,7 @@ public function getAllListings() {
     }
     return $all_country_listings;
 }
-
-public function getAllListingsByYear($year) {
-    $query = "SELECT * FROM care WHERE year = :year AND countrycode = 'ALL'";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindValue(':year', $year, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
+//get listings with other countrycode than all
 public function getNonAllListings() {
     $sql = "SELECT * FROM care WHERE countrycode!='ALL'";
     $result = mysqli_query($this->conn, $sql);
@@ -56,8 +45,7 @@ public function getNonAllListings() {
     }
     return $listings;
 }
-
-
+//insert data to db
 public function insertData($table, $data) {
     $countrycode = mysqli_real_escape_string($this->conn, $data['countrycode']);
     $year = mysqli_real_escape_string($this->conn, $data['year']);
@@ -107,20 +95,15 @@ public function insertData($table, $data) {
         }
     }
 }
-
-
-
-
-
 public function fetchDataAndInsertIntoDatabase() {
-    // Fetch data from API
+    // fetch data from API
     $url = "https://www.forsakringskassan.se/fk_apps/MEKAREST/public/v1/iv-planerad/IVplaneradvardland.json";
     $data = file_get_contents($url);
 
-    // Convert JSON data to PHP array
+    //convert JSON data to PHP array
     $array = json_decode($data, true);
 
-    // Loop through array and insert data into database
+    //loop through array and insert data into database
     foreach ($array as $row) {
 
         $table = "care";
@@ -128,12 +111,9 @@ public function fetchDataAndInsertIntoDatabase() {
 $women = !empty($row['observations']['antal']['value']) && !empty($row['dimensions']['kon_kod']) && $row['dimensions']['kon_kod'] == 'K' ? $row['observations']['antal']['value'] : null;
 $men = !empty($row['observations']['antal']['value']) && !empty($row['dimensions']['kon_kod']) && $row['dimensions']['kon_kod'] == 'M' ? $row['observations']['antal']['value'] : null;
 
-        
-
         if ($women == 0 && $men == 0 && $total == 0) {
             continue;
         }
-
         $data = array(
             "countrycode" => $row['dimensions']['vardland_kod'],
             "year" => $row['dimensions']['ar'],
@@ -145,10 +125,9 @@ $men = !empty($row['observations']['antal']['value']) && !empty($row['dimensions
         $this->insertData($table, $data);
     }
 }
-
-
 }
 
 $care = new Care();
+//run fetchdataandinsertintodatabase function
     $care->fetchDataAndInsertIntoDatabase();
 

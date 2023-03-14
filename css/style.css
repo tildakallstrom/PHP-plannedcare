@@ -1,49 +1,151 @@
+html {
+  color: black;
+  font-family: 'Helvetica', sans-serif;
+}
 body {
-  max-width: 900px;
-  margin: auto;
+  background-color: whitesmoke;
 }
-table.diagram {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+header {
+  margin-bottom: 4em;
+  background-color: #116A3E;
+  padding: 2em;
 }
-table.diagram th,
-table.diagram td {
-  padding: 5px;
-  text-align: center;
+.info {
+  margin-top: -1em;
+  padding-bottom: 1em;
 }
-table.diagram td.bar {
-  position: relative;
-  height: 20px;
-  background-color: #ddd;
-  border: 1px solid #999;
+.main {
+  -webkit-box-shadow: 0 0 10px darkgray;
+      box-shadow: 0 0 10px darkgray;
+  max-width: 940px;
+  padding: 20px;
+  margin:auto;
+  background-color: white;
+}
+.percent-scale {
+display: flex;
+justify-content: space-between;
+margin-bottom: 5px;
+}
+.percent-scale span {
+text-align: center;
+}
+.data-list {
+list-style: none;
+margin: 0;
+padding: 0;
+margin-top: -0.7em;
+margin-bottom: 4em;
+}
+.data-list h2 {
+margin: 0 0 10px;
+padding-bottom: 1em;
+margin-top: -0.5em;
+font-size: 1em;
+}
+.data-list li > ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.data-list .country-code {
+display: inline-block;
+width: 100px;
+margin-top: 10px;
+margin-bottom: -10px;
+}
+.listing {
+  margin-top: 0.5em;
+}
+.data-list .bar-container {
+  display: inline-block;
+  width: 90%;
+  height: 24px;
   overflow: hidden;
+  margin-left: 40px;
+  margin-top: -20px;
+  margin-bottom: 6px;
 }
-table.diagram td.bar .inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #555;
+.percent {
+  display: block;
+  margin-top: -15px;
 }
-table.diagram td.bar .label {
-  position: absolute;
-  right: 100%;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  text-align: right;
-  padding-right: 5px;
-  font-size: 10px;
-  color: #888;
-  white-space: nowrap;
+.bar {
+position: absolute;
+height: 100%;
+float: left;
+height: 20px;
+border-radius: 10px;
+margin-bottom: 10px;
 }
-table.diagram td.bar .label.bottom {
-  top: auto;
-  bottom: -15px;
-  font-size: 12px;
-  color: #333;
-  white-space: nowrap;
-  transform: rotate(-45deg) translateX(50%);
-  transform-origin: bottom left;
+.bar span {
+  font-size: 0.9em;
+}
+.data-list .bar.total {
+  height: 33%;
+background-color: black;
+top: 0px;
+left: 0;
+}
+.data-list .bar.women {
+  height: 33%;
+background-color: pink;
+top: 8px;
+left: 0;
+}
+.data-list .bar.men {
+  height: 33%;
+background-color: blue;
+top: 16px;
+left: 0;
+}
+.bar .inner {
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+}
+.bar-container {
+position: relative;
+height: 20px;
+width: 100%;
+}
+.country-code {
+font-weight: bold;
+font-size: 16px;
+margin-right: 10px;
+}
+@media only screen and (max-width: 1020px) {
+  .logo {
+  max-width: 180px;
+}
+    .stripes {
+      background-size: 100% 100%; /* adjust background size for smaller screens */
+      background-position: center top; /* adjust background position for smaller screens */
+  }
+  .percent-scale {
+      max-width: 100%;
+  }
+  .percent-scale span {
+font-size: 0.75em;
+}
+}
+@media only screen and (min-width: 1020px) {
+  .logo {
+  max-width: 300px;
+}
+  .stripes {
+background-image: linear-gradient(to right, #fff 0%, transparent 0%, 
+transparent 40px, #D3D3D3 40px, #D3D3D3 41px, transparent 41px, 
+transparent 116px, #D3D3D3 116px, #D3D3D3 116px, transparent 117px, 
+transparent 198px, #D3D3D3 198px, #D3D3D3 198px, transparent 199px, 
+transparent 280px, #D3D3D3 280px, #D3D3D3 280px, transparent 281px, 
+transparent 362px, #D3D3D3 362px, #D3D3D3 362px, transparent 363px, 
+transparent 446px, #D3D3D3 446px, #D3D3D3 446px, transparent 447px, 
+transparent 527px, #D3D3D3 527px, #D3D3D3 527px, transparent 528px, 
+transparent 613px, #D3D3D3 613px, #D3D3D3 613px, transparent 614px, 
+transparent 693px, #D3D3D3 693px, #D3D3D3 693px, transparent 694px, 
+transparent 775px, #D3D3D3 775px, #D3D3D3 775px, transparent 776px, 
+transparent 860px, #D3D3D3 860px, #D3D3D3 860px,transparent 861px, transparent 900px);
+}
 }

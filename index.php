@@ -1,16 +1,16 @@
 <?php
 require_once('config.php');
 include('includes/header.php');
-
+?>
+<h1>Antal personer som har fått planerad vård utomlands</h1>
+<p class="info">Antalen personer visas i procent i nedan diagram, där totalen visas i svart, kvinnor i rosa och män i blått.</p>
+<?php
 // Create an instance of the Care class
 $care = new Care();
 
 // Fetch the data from the database
 $listings = $care->getnonAllListings();
-
 $all = $care->getAllListings();
-
-
 
 // Group the listings by year
 $grouped_listings = [];
@@ -30,83 +30,56 @@ foreach ($listings as $listing) {
   $max_women = max($max_women, $listing['women']);
   $max_men = max($max_men, $listing['men']);
 }
-
 $current_year = null;
 ?>
 
-
+<ul class="data-list">
 <?php foreach ($grouped_listings as $year => $year_listings) : ?>
- <h2><?= $year ?></h2>
- <?php 
- 
-$year_total = 0;
-$year_women = 0;
-$year_men = 0;
-
-foreach ($all as $listing) {
-  if ($listing['year'] == $year && $listing['countrycode'] == 'ALL') {
-    $year_total = $listing['total'];
-    $year_women = $listing['women'];
-    $year_men = $listing['men'];
-    break;
+  <?php
+  $year_total = 0;
+  $year_women = 0;
+  $year_men = 0;
+//loop through listings with countrycode all
+  foreach ($all as $listing) {
+    if ($listing['year'] == $year && $listing['countrycode'] == 'ALL') {
+      $year_total = $listing['total'];
+      $year_women = $listing['women'];
+      $year_men = $listing['men'];
+      break;
+    }
   }
-}
-?>
+  ?>
+  
+  <h2>Totalt antal personer som fått vård utomlands <?= $year ?>: <?= $year_total ?>st, varav antal kvinnor: <?= $year_women ?>st, och antal män: <?= $year_men ?>st.</h2>
+  
+  <!-- Add the percent scale -->
+  <span class="percent">%</span>
+ <div class="bar-container">
+<div class="percent-scale">
+  <?php for ($i = 0; $i <= 10; $i++) : ?>
+    <span class=""><?= $i * 10 ?></span>
+  <?php endfor; ?>
+</div>
+</div>
 
-<h2>Total for <?= $year ?>: <?= $year_total ?>, Women: <?= $year_women ?>, Men: <?= $year_men ?></h2>
-
-
-  <table class="diagram">
-    <thead>
-      <tr>
-        <th>Country Code</th>
-        <th>Total</th>
-        <th>Women</th>
-        <th>Men</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($year_listings as $listing) : ?>
-        <tr>
-          <td><?= $listing['countrycode'] . ' ' . $listing['year'] ?></td>
-          <td class="bar">
-            <div class="inner" style="width: <?= round($listing['total'] / $max_total * 100) ?>%">
-              <?php if (is_null($listing['total'])) {
-                echo "0";
-              } else {
-                echo $listing['total'];
-              } ?>
-            </div>
-            <div class="label"><?= $listing['total'] ?></div>
-          </td>
-          <td class="bar">
-            <div class="inner" style="width: <?= round($listing['women'] / $max_women * 100) ?>%">
-              <?php if (is_null($listing['women'])) {
-                echo "0";
-              } else {
-                echo $listing['women'];
-              } ?>
-            </div>
-            <div class="label"><?= $listing['women'] ?></div>
-          </td>
-          <td class="bar">
-            <div class="inner" style="width: <?= round($listing['men'] / $max_men * 100) ?>%">
-              <?php if (is_null($listing['men'])) {
-                echo "0";
-              } else {
-                echo $listing['men'];
-              } ?>
-            </div>
-            <div class="label"><?= $listing['men'] ?></div>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-      <tr>
-        <td></td>
-        <td class="bar">
-          <div class="label bottom"><?= floor($max_total / 10) ?>0</div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <ul class="data-list stripes">
+      <?php  //loop through listings grouped by year
+      foreach ($year_listings as $listing) : ?>
+  <?php
+  $total_percent = $year_total > 0 ? round($listing['total'] / $year_total * 100) : 0;
+  $women_percent = $year_women > 0 ? round($listing['women'] / $year_total * 100) : 0;
+  $men_percent = $year_men > 0 ? round($listing['men'] / $year_total * 100) : 0;
+  ?>
+  <li>
+    <div class="country-code"><?= $listing['countrycode'] ?></div>
+    <div class="bar-container">
+      <div class="bar total" style="width: <?= $total_percent ?>%"></div>
+      <div class="bar women" style="width: <?= $women_percent ?>%"></div>
+      <div class="bar men" style="width: <?= $men_percent ?>%"><span></span></div>
+    </div>
+  </li>
 <?php endforeach; ?>
+  </ul>
+<?php endforeach; ?>
+</ul>
+

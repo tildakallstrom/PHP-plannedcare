@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,13 @@
 </style>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <title>Planned Care</title>
+    <title>Planerad vård</title>
 </head>
 <body>
-    <header><h1>HEJ</h1></header>
+    <header>
+        <div class="grid">
+            <img src="https://tildakallstrom.se/WebOne/includes/logo.png" class="logo"/>
+        </div>
+        </header>
+        <div class="main">
     
