@@ -21,3 +21,5 @@ define("DBDATABASE", "");
 error_reporting(-1);
 ini_set("display_errors", 1);
 ```
+## View result
+To view the result, visit https://tildakallstrom.se/WebOne/index.php
